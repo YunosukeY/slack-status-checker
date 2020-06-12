@@ -1,23 +1,19 @@
 # Slack Status Checker
 Slackメンバーのログイン具合を可視化します．
 
-## 使ったもの
-- Slack API
-- AWS
-  - S3: Lambda Layer用
-  - Lambda
-  - EventBridge: トリガー
-  - SQS: データを貯める用 
-
-## ファイル
-### status_collector.py
-メンバーのステータスを収集します．
-
-### status_visualizer.py
-収集したデータをグラフにし，Slackに送ります．
+![使用イメージ](https://user-images.githubusercontent.com/39757050/84554370-7def9c00-ad52-11ea-928f-c3594ca04133.png)
 
 ## 構成
 ![構成図](https://user-images.githubusercontent.com/39757050/84477914-6a4d2280-accb-11ea-8b5a-be86c542c781.png)
+
+## ファイル
+### status_collector.py
+メンバーのステータスを収集します．  
+Lambdaでは一定時間おきに実行し，結果をSQSに貯めます．
+
+### status_visualizer.py
+収集したデータをグラフにし，結果をSlackにアップロードします．  
+Lambdaでは1日おきに実行します．
 
 ## 参考文献
 [LambdaのPythonチュートリアル](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-python.html)  
